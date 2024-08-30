@@ -1,0 +1,21 @@
+<div class="d-flex justify-content-center align-items-start">
+  <h5>Installlers for <%= current_user.territory.name %> </h5>
+</div>
+
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <ul class="list-group space-between">
+        <% @installers.each do |installer| %>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <%= installer.name %>
+            <div>
+              <%= link_to "Edit", edit_installer_path(installer), class: "mx-1" %>
+              <%= link_to "Delete", remove_installer_path(installer), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
