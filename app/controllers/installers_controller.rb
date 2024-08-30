@@ -14,6 +14,14 @@ class InstallersController < ApplicationController
     redirect_to installers_path
   end
 
+  def remove
+    puts "::::#{params}"
+    installer = Installer.find(params[:id])
+    return unless installer.destroy
+
+    redirect_to installers_path
+  end
+
 private
 
   def installer_params

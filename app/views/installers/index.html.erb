@@ -10,8 +10,8 @@
           <li class="list-group-item d-flex justify-content-between align-items-center">
             <%= installer.name %>
             <div>
-              <%= link_to "Edit", edit_installer_path(installer.id), class: "mx-1" %>
-              <%= link_to "Delete", root_path, class: "mx-1" %>
+              <%= link_to "Edit", edit_installer_path(installer), class: "mx-1" %>
+              <%= link_to "Delete", remove_installer_path(installer), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
             </div>
           </li>
         <% end %>
