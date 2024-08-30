@@ -1,0 +1,9 @@
+<%= form_with model: @installer, local: true do |f|%>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.label :territory %>
+  <%= f.collection_select :territory_id, Territory.all, :id, :name%>
+
+  <%= f.submit%>
+<% end %>
