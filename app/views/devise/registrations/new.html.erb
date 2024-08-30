@@ -27,8 +27,9 @@
 
       <div class="mb-3">
         <%= f.label :territory, class: "form-label" %>
-        <%= f.collection_select :territory, Territory.all, :id, :name, {}, { class: "form-select" } %>
+        <%= f.collection_select :territory_id, Territory.all, :id, :name, {}, { class: "form-select" } %>
       </div>
+<%= render "devise/shared/links" %>
 
       <div class="d-grid">
         <%= f.submit "Sign up", class: "btn btn-primary" %>
@@ -38,4 +39,3 @@
 </div>
 
 
-<%= render "devise/shared/links" %>
