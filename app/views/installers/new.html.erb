@@ -9,7 +9,8 @@
 
         <div class="mb-3">
           <%= f.label :territory, class: 'form-label' %>
-          <%= f.collection_select :territory_id, Territory.all, :id, :name, {}, class: 'form-control' %>
+          <p><%= current_user.territory.name %></p>
+          <%= f.hidden_field :territory_id, value: current_user.territory.id %>
         </div>
 
         <div class="text-center">

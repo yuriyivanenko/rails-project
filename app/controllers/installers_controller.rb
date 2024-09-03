@@ -3,6 +3,17 @@ class InstallersController < ApplicationController
     @installers = current_user.territory.installers
   end
 
+  def new
+    @installer = Installer.new
+  end
+
+  def create
+    @installer = Installer.new(installer_params)
+    return unless @installer.save
+
+    redirect_to root_path
+  end
+
   def edit
     @installer = Installer.find(params[:id])
   end
