@@ -22,6 +22,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_30_143259) do
   create_table "territories", force: :cascade do |t|
     t.string "name"
     t.string "code"
+    t.boolean "windows"
+    t.boolean "siding"
+    t.boolean "doors"
+    t.boolean "gutters"
+    t.boolean "roofing"
+    t.boolean "solar"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
