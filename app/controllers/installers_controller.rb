@@ -31,7 +31,7 @@ class InstallersController < ApplicationController
     redirect_to installers_path
   end
 
-  def remove
+  def destroy
     installer = Installer.find(params[:id])
     return unless installer.destroy
 

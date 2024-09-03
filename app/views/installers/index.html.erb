@@ -14,7 +14,7 @@
               <%= installer.name %>
               <div>
                 <%= link_to "Edit", edit_installer_path(installer), class: "mx-1" %>
-                <%= link_to "Delete", remove_installer_path(installer), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
+                <%= link_to "Delete", installer_path(installer), data: {turbo_method: :delete, turbo_confirm: 'Are you sure you want to delete this installer? This will delete all transactions for this isntaller'} %>
               </div>
             </li>
           <% end %>
