@@ -1,9 +1,13 @@
 class InstallersController < ApplicationController
   def index
+    return unless user_signed_in?
+
     @installers = current_user.territory.installers
   end
 
   def new
+    return unless user_signed_in?
+
     @installer = Installer.new
   end
 
