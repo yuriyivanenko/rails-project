@@ -19,6 +19,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_03_152254) do
     t.index ["territory_id"], name: "index_installers_on_territory_id"
   end
 
+  create_table "parts", force: :cascade do |t|
+    t.integer "product_coding"
+    t.string "part_number"
+    t.string "description"
+    t.integer "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "territories", force: :cascade do |t|
     t.string "name"
     t.string "code"
@@ -34,10 +43,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_03_152254) do
 
   create_table "transactions", force: :cascade do |t|
     t.integer "installer_id"
-    t.integer "amount"
+    t.integer "territory_id"
+    t.integer "part_id"
+    t.integer "quantity"
+    t.decimal "amount", precision: 10, scale: 2
+    t.string "project_number"
+    t.string "product"
+    t.datetime "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["installer_id"], name: "index_transactions_on_installer_id"
+    t.index ["part_id"], name: "index_transactions_on_part_id"
+    t.index ["territory_id"], name: "index_transactions_on_territory_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -56,5 +73,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_03_152254) do
 
   add_foreign_key "installers", "territories"
   add_foreign_key "transactions", "installers"
+  add_foreign_key "transactions", "parts"
+  add_foreign_key "transactions", "territories"
   add_foreign_key "users", "territories"
 end
