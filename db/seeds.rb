@@ -1,5 +1,6 @@
-Territory.destroy_all
+# Territory.destroy_all
 Installer.destroy_all
+Transaction.destroy_all
 
 territories = [
   { code: "01", name: "PHL", windows: true, siding: true, doors: true, gutters: true, roofing: true, solar: false },
@@ -61,5 +62,6 @@ installers = [
 
 installers.each do |installer|
   territory = Territory.find_by(name: installer[:territory])
-  Installer.find_or_create_by(name: installer[:name], territory: territory)
+  installer = Installer.find_or_create_by(name: installer[:name], territory: territory)
+  Transaction.create(installer: installer, amount: rand(25..500))
 end
