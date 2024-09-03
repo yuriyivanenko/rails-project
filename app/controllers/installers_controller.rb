@@ -9,9 +9,11 @@ class InstallersController < ApplicationController
 
   def create
     @installer = Installer.new(installer_params)
-    return unless @installer.save
-
-    redirect_to root_path
+    if @installer.save
+      redirect_to root_path
+    else
+      render :new, status: 422
+    end
   end
 
   def edit
@@ -26,7 +28,6 @@ class InstallersController < ApplicationController
   end
 
   def remove
-    puts "::::#{params}"
     installer = Installer.find(params[:id])
     return unless installer.destroy
 
