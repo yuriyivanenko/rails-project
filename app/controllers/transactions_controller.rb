@@ -4,5 +4,6 @@ class TransactionsController < ApplicationController
   end
 
   def create
+    puts params
   end
 end
