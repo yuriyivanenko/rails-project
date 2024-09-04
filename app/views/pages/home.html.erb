@@ -8,6 +8,26 @@
       <% end %>
     </div>
   </div>
+
+  <div class="container mt-5 text-center">
+    <h2>Filter Transactions by Date Range</h2>
+    <%= form_with url: root_path, method: :get, local: true do %>
+      <div class="row">
+        <div class="col-md-4">
+          <%= label_tag :start_date, 'Start Date' %>
+          <%= date_field_tag :start_date, params[:start_date], class: "form-control" %>
+        </div>
+        <div class="col-md-4">
+          <%= label_tag :end_date, 'End Date' %>
+          <%= date_field_tag :end_date, params[:end_date], class: "form-control" %>
+        </div>
+        <div class="col-md-4">
+          <%= submit_tag 'Filter', class: "btn btn-primary mt-4" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
   <div class="container mt-5">
   <div class="row justify-content-center">
     <div class="col-md-8">
