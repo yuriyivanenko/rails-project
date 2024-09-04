@@ -1,7 +1,9 @@
 FactoryBot.define do
   factory :user do
-    name { "AAA Roofing" }
-    email { "contact@aaaroofing.com" }
+    name { "Thomas Roony" }
+    email { "tomwillcomeforu@gmail.com.com" }
+    password { 'password123' }
+    password_confirmation { 'password123' }
     territory
   end
 end
