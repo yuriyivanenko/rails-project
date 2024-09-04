@@ -26,6 +26,7 @@ class InstallersController < ApplicationController
 
   def update
     @installer = Installer.find(params[:id])
+
     if @installer.update(installer_params)
       redirect_to installers_path
     else
