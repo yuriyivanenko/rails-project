@@ -13,5 +13,4 @@ RSpec.describe Territory, type: :model do
       create_list(:installer, 2, territory: @territory)
       expect(@territory.installers.count).to eq(2)
     end
-
 end
