@@ -1,0 +1,22 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>Project Number</th>
+            <th>Project Manager</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @projects.each do |project| %>
+            <tr>
+              <td><%= project.project_number %></td>
+              <td><%= project.project_manager %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,23 @@
 class InstallersController < ApplicationController
   def index
+    return unless user_signed_in?
+
     @installers = current_user.territory.installers
+  end
+
+  def new
+    return unless user_signed_in?
+
+    @installer = Installer.new
+  end
+
+  def create
+    @installer = Installer.new(installer_params)
+    if @installer.save
+      redirect_to root_path
+    else
+      render :new, status: 422
+    end
   end
 
   def edit
@@ -8,14 +25,16 @@ class InstallersController < ApplicationController
   end
 
   def update
-    installer = Installer.find(params[:id])
-    return unless installer.update(installer_params)
+    @installer = Installer.find(params[:id])
 
-    redirect_to installers_path
+    if @installer.update(installer_params)
+      redirect_to installers_path
+    else
+      render :edit, status: 422
+    end
   end
 
-  def remove
-    puts "::::#{params}"
+  def destroy
     installer = Installer.find(params[:id])
     return unless installer.destroy
 

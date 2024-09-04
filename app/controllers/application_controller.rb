@@ -4,6 +4,6 @@ class ApplicationController < ActionController::Base
 protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:territory_id])
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[territory_id name])
   end
 end

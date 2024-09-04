@@ -1,10 +1,12 @@
 class User < ApplicationRecord
-  validates :territory, presence: true
   belongs_to :territory
   has_many :installers, through: :territory
+  has_many :transactions, through: :installers
+  has_many :projects, through: :transactions
 
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  validates :territory, presence: true
+  validates :name, presence: true
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 end

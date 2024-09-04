@@ -1,24 +1,11 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This project is a light way system for entering miscellaneous payments to Nitro installers. Currently the accounting department does not have a way in Nitro to process these payments. They are managed via a Google Sheet. With this tool a user would sign up and be associated with a territory. Then they would create installers for their territory. Afterwards they would create transactions, selecting an installer and project. When creating a transaction the project would be created at the same time.
 
-Things you may want to cover:
+User authentication is provided by Devise.
 
-* Ruby version
+### Steps for setup
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+1. Clone repo
+2. Run `bundle install`, `rails db:migrate db:seed`
+3. Run `rails s` to start the server

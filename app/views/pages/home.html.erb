@@ -1,0 +1,63 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 text-center">
+      <% if user_signed_in? %>
+        <%= button_to "New Installer", new_installer_path, method: :get, class: "btn btn-primary mb-3" %>
+        <%= button_to "New Transaction", new_transaction_path, method: :get, class: "btn btn-primary mb-3" %>
+        <%= button_to "Projects", projects_path, method: :get, class: "btn btn-primary mb-3" %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="container mt-5 text-center">
+    <h2>Filter Transactions by Date Range</h2>
+    <%= form_with url: root_path, method: :get, local: true do %>
+      <div class="row">
+        <div class="col-md-4">
+          <%= label_tag :start_date, 'Start Date' %>
+          <%= date_field_tag :start_date, params[:start_date], class: "form-control" %>
+        </div>
+        <div class="col-md-4">
+          <%= label_tag :end_date, 'End Date' %>
+          <%= date_field_tag :end_date, params[:end_date], class: "form-control" %>
+        </div>
+        <div class="col-md-4">
+          <%= submit_tag 'Filter', class: "btn btn-primary mt-4" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Project Number</th>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Installer</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @transactions.each do |transaction| %>
+            <tr>
+              <td><%= transaction.date.strftime("%Y-%m-%d") %></td>
+              <td><%= transaction.project.project_number %></td>
+              <td><%= transaction.description %></td>
+              <td><%= number_to_currency(transaction.amount) %></td>
+              <td>
+                <%= transaction.installer.name %>
+                <%= link_to 'Edit', edit_transaction_installer_path(transaction, transaction.installer), class: "btn btn-primary btn-sm" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+</div>
