@@ -1,38 +1,28 @@
-# Territory.destroy_all
+require "faker"
+
+Territory.destroy_all
 Installer.destroy_all
 Transaction.destroy_all
 
 territories = [
-  { code: "01", name: "PHL", windows: true, siding: true, doors: true, gutters: true, roofing: true, solar: false },
-  { code: "02", name: "NJ",  windows: true, siding: true, doors: true, gutters: true, roofing: true, solar: true },
-  { code: "03", name: "MD",  windows: true, siding: true, doors: true, gutters: true, roofing: true, solar: false },
-  { code: "04", name: "CT",  windows: true, siding: true, doors: true, gutters: true, roofing: true, solar: false },
-  { code: "05", name: "LI",  windows: true, siding: true, doors: true, gutters: true, roofing: true, solar: false },
-  { code: "06", name: "BOS", windows: true, siding: true, doors: true, gutters: true, roofing: true, solar: false },
-  { code: "07", name: "ATL", windows: [true, false].sample, siding: [true, false].sample, doors: [true, false].sample,
-    gutters: [true, false].sample, roofing: [true, false].sample, solar: false },
-  { code: "08", name: "CHI", windows: [true, false].sample, siding: [true, false].sample, doors: [true, false].sample,
-    gutters: [true, false].sample, roofing: [true, false].sample, solar: false },
-  { code: "09", name: "DET", windows: [true, false].sample, siding: [true, false].sample, doors: [true, false].sample,
-    gutters: [true, false].sample, roofing: [true, false].sample, solar: false },
-  { code: "10", name: "HOU", windows: [true, false].sample, siding: [true, false].sample, doors: [true, false].sample,
-    gutters: [true, false].sample, roofing: [true, false].sample, solar: false },
-  { code: "12", name: "DAL", windows: [true, false].sample, siding: [true, false].sample, doors: [true, false].sample,
-    gutters: [true, false].sample, roofing: [true, false].sample, solar: false },
-  { code: "13", name: "DEN", windows: [true, false].sample, siding: [true, false].sample, doors: [true, false].sample,
-    gutters: [true, false].sample, roofing: [true, false].sample, solar: false },
-  { code: "15", name: "TPA", windows: [true, false].sample, siding: [true, false].sample, doors: [true, false].sample,
-    gutters: [true, false].sample, roofing: [true, false].sample, solar: false },
-  { code: "16", name: "AUS", windows: [true, false].sample, siding: [true, false].sample, doors: [true, false].sample,
-    gutters: [true, false].sample, roofing: [true, false].sample, solar: false },
-  { code: "17", name: "CLT", windows: [true, false].sample, siding: [true, false].sample, doors: [true, false].sample,
-    gutters: [true, false].sample, roofing: [true, false].sample, solar: false },
-  { code: "50", name: "NSH", windows: [true, false].sample, siding: [true, false].sample, doors: [true, false].sample,
-    gutters: [true, false].sample, roofing: [true, false].sample, solar: false },
-  { code: "51", name: "PHX", windows: [true, false].sample, siding: [true, false].sample, doors: [true, false].sample,
-    gutters: [true, false].sample, roofing: [true, false].sample, solar: true },
-  { code: "52", name: "PIT", windows: [true, false].sample, siding: [true, false].sample, doors: [true, false].sample,
-    gutters: [true, false].sample, roofing: [true, false].sample, solar: false },
+  { territory_coding: "01", name: "PHL" },
+  { territory_coding: "02", name: "NJ" },
+  { territory_coding: "03", name: "MD" },
+  { territory_coding: "04", name: "CT" },
+  { territory_coding: "05", name: "LI" },
+  { territory_coding: "06", name: "BOS" },
+  { territory_coding: "07", name: "ATL" },
+  { territory_coding: "08", name: "CHI" },
+  { territory_coding: "09", name: "DET" },
+  { territory_coding: "10", name: "HOU" },
+  { territory_coding: "12", name: "DAL" },
+  { territory_coding: "13", name: "DEN" },
+  { territory_coding: "15", name: "TPA" },
+  { territory_coding: "16", name: "AUS" },
+  { territory_coding: "17", name: "CLT" },
+  { territory_coding: "50", name: "NSH" },
+  { territory_coding: "51", name: "PHX" },
+  { territory_coding: "52", name: "PIT" },
 ]
 
 Territory.create!(territories)
@@ -62,5 +52,19 @@ installers = [
 
 installers.each do |installer|
   territory = Territory.find_by(name: installer[:territory])
-  Installer.find_or_create_by(name: installer[:name], territory: territory)
+  installer = Installer.find_or_create_by(name: installer[:name], territory: territory)
+
+  project_number = "#{Faker::Number.number(digits: 2)}-#{Faker::Number.number(digits: 5)}"
+  first_name = Faker::Name.first_name
+  last_name = Faker::Name.last_name
+  full_name = "#{first_name} #{last_name}"
+  fake_date = Faker::Date.between(from: Date.new(Date.today.year, 7, 1), to: Date.new(Date.today.year, 8, 31))
+
+  project = Project.create(project_number: project_number, project_manager: full_name)
+
+  Transaction.create(installer: installer, territory: territory,
+                     description: "Service",
+                     amount: rand(24...350),
+                     project: project,
+                     date: fake_date)
 end

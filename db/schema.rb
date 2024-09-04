@@ -20,6 +20,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_03_152254) do
     t.index ["territory_id"], name: "index_installers_on_territory_id"
   end
 
+  create_table "projects", force: :cascade do |t|
+    t.string "project_number"
+    t.string "project_manager"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "territories", force: :cascade do |t|
     t.string "name"
     t.string "territory_coding"
@@ -32,11 +39,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_03_152254) do
     t.integer "territory_id"
     t.string "description"
     t.decimal "amount", precision: 10, scale: 2
-    t.string "project_number"
+    t.integer "project_id"
     t.datetime "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["installer_id"], name: "index_transactions_on_installer_id"
+    t.index ["project_id"], name: "index_transactions_on_project_id"
     t.index ["territory_id"], name: "index_transactions_on_territory_id"
   end
 
@@ -56,6 +64,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_03_152254) do
 
   add_foreign_key "installers", "territories"
   add_foreign_key "transactions", "installers"
+  add_foreign_key "transactions", "projects"
   add_foreign_key "transactions", "territories"
   add_foreign_key "users", "territories"
 end
