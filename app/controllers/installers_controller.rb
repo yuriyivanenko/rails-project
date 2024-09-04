@@ -25,10 +25,12 @@ class InstallersController < ApplicationController
   end
 
   def update
-    installer = Installer.find(params[:id])
-    return unless installer.update(installer_params)
-
-    redirect_to installers_path
+    @installer = Installer.find(params[:id])
+    if @installer.update(installer_params)
+      redirect_to installers_path
+    else
+      render :edit, status: 422
+    end
   end
 
   def destroy
