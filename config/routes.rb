@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   resources :transactions, only: %i[new create] do
     resources :installers, only: %i[edit update]
   end
+  resources :projects, only: %i[index]
 end

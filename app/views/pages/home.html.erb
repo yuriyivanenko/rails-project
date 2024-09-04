@@ -4,6 +4,7 @@
       <% if user_signed_in? %>
         <%= button_to "New Installer", new_installer_path, method: :get, class: "btn btn-primary mb-3" %>
         <%= button_to "New Transaction", new_transaction_path, method: :get, class: "btn btn-primary mb-3" %>
+        <%= button_to "Projects", projects_path, method: :get, class: "btn btn-primary mb-3" %>
       <% end %>
     </div>
   </div>
