@@ -1,5 +1,7 @@
 require "faker"
 
+puts "Seeding data..."
+
 Territory.destroy_all
 Installer.destroy_all
 Transaction.destroy_all
@@ -74,3 +76,5 @@ installers.each do |installer|
                      project: project,
                      date: fake_date)
 end
+
+puts "Done!"
