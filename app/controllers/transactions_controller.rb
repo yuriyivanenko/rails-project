@@ -5,9 +5,10 @@ class TransactionsController < ApplicationController
 
   def create
     project = Project.find_or_create_by(
-      project_number: transaction_params[:project_number],
-      project_manager: transaction_params[:project_manager]
-    )
+      project_number: transaction_params[:project_number]
+    ) do |p|
+      p.project_manager = transaction_params[:project_manager] # This will only set if a new project is created
+    end
 
     @transaction = Transaction.new(transaction_params.except(:project_number, :project_manager))
     @transaction.project = project

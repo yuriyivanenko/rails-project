@@ -9,3 +9,4 @@ User authentication is provided by Devise.
 1. Clone repo
 2. Run `bundle install`, `rails db:migrate db:seed`
 3. Run `rails s` to start the server
+4. Navigate to `http://localhost:3000/` to views the app

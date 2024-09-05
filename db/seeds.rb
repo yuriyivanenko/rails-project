@@ -50,9 +50,15 @@ installers = [
   { territory: "PHL", name: "Cavallari" },
 ]
 
+def string_to_email(company_name)
+  email_name = company_name.downcase.gsub(/[^a-z0-9\s]/i, "").gsub(/\s+/, ".")
+  "#{email_name}@example.com"
+end
+
 installers.each do |installer|
   territory = Territory.find_by(name: installer[:territory])
-  installer = Installer.find_or_create_by(name: installer[:name], territory: territory)
+  installer = Installer.find_or_create_by(name: installer[:name], email: string_to_email(installer[:name]),
+                                          territory: territory)
 
   project_number = "#{Faker::Number.number(digits: 2)}-#{Faker::Number.number(digits: 5)}"
   first_name = Faker::Name.first_name

@@ -20,6 +20,11 @@
         </div>
 
         <div class="mb-3">
+          <%= f.label :email, class: 'form-label' %>
+          <%= f.email_field :email, class: 'form-control' %>
+        </div>
+
+        <div class="mb-3">
           <%= f.label :territory, class: 'form-label' %>
           <p><%= current_user.territory.name %></p>
           <%= f.hidden_field :territory_id, value: current_user.territory.id %>

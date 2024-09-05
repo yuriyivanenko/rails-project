@@ -44,6 +44,6 @@ class InstallersController < ApplicationController
 private
 
   def installer_params
-    params.require(:installer).permit(:name, :territory_id)
+    params.require(:installer).permit(:name, :email, :territory_id)
   end
 end

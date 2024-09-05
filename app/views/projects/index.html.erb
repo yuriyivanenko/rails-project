@@ -5,14 +5,14 @@
         <thead>
           <tr>
             <th>Project Number</th>
-            <th>Project Manager</th>
+            <th>Total Amount</th>
           </tr>
         </thead>
         <tbody>
           <% @projects.each do |project| %>
             <tr>
               <td><%= project.project_number %></td>
-              <td><%= project.project_manager %></td>
+              <td><%= number_to_currency(project.total_amount) %></td>
             </tr>
           <% end %>
         </tbody>
