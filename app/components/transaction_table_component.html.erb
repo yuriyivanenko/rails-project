@@ -1,0 +1,25 @@
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Project Number</th>
+      <th>Description</th>
+      <th>Amount</th>
+      <th>Installer</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% transactions.each do |transaction| %>
+      <tr>
+        <td><%= transaction.date.strftime("%m/%d/%y") %></td>
+        <td><%= transaction.project.project_number %></td>
+        <td><%= transaction.description %></td>
+        <td><%= number_to_currency(transaction.amount) %></td>
+        <td>
+          <%= transaction.installer.name %>
+          <%= link_to 'Edit', edit_transaction_installer_path(transaction, transaction.installer), class: "btn btn-primary btn-sm" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
